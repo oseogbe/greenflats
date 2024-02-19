@@ -1,7 +1,7 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
 import { FaXTwitter } from "react-icons/fa6";
@@ -9,16 +9,17 @@ import { FcGoogle } from "react-icons/fc";
 
 import useLoginModal from "@/hooks/useLoginModal";
 import useRegisterModal from "@/hooks/useRegisterModal";
+
 import Modal from "./Modal";
 import Heading from "../Heading";
-import Input from "../Input";
+import Input from "../inputs/Input";
 import toast from "react-hot-toast";
 import Button from "../Button";
 
 const LoginModal = () => {
     const router = useRouter();
-    const registerModal = useRegisterModal();
     const loginModal = useLoginModal();
+    const registerModal = useRegisterModal();
     const [isLoading, setIsLoading] = useState(false);
 
     const {
@@ -54,6 +55,11 @@ const LoginModal = () => {
             }
         });
     }
+
+    const toggle = useCallback(() => {
+        loginModal.onClose();
+        registerModal.onOpen();
+    }, [loginModal, registerModal]);
 
     const title = (
         <>
@@ -101,15 +107,16 @@ const LoginModal = () => {
                 label="Continue with Twitter"
                 icon={FaXTwitter}
                 onClick={() => signIn('twitter')}
+                disabled={true}
             />
             <div className="text-neutral-500 text-center mt-4 font-light">
                 <div className="flex flex-row items-center justify-center gap-2">
-                    <div>Already have an account?</div>
+                    <div>New to Greenflats?</div>
                     <div
-                        onClick={loginModal.onClose}
+                        onClick={toggle}
                         className="text-neutral-800 cursor-pointer hover:underline"
                     >
-                        Log in
+                        Create an account
                     </div>
                 </div>
             </div>

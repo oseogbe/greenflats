@@ -97,9 +97,10 @@ const Modal: React.FC<ModalProps> = ({
                     xl:w-[580px]
                     my-6 
                     mx-auto 
-                    h-full 
+                    h-full
+                    md:h-auto
                     lg:h-auto 
-                    md:h-auto"
+                "
             >
                 <div className={`
                     translate 
@@ -112,8 +113,8 @@ const Modal: React.FC<ModalProps> = ({
                         className="
                             translate 
                             h-full 
-                            lg:h-auto 
                             md:h-auto 
+                            lg:h-auto 
                             border-0 
                             rounded-lg 
                             shadow-lg 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { signIn } from "next-auth/react";
 import axios from "axios";
 import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
@@ -8,14 +8,17 @@ import { FcGoogle } from "react-icons/fc";
 import { FaXTwitter } from "react-icons/fa6";
 
 import useRegisterModal from "@/hooks/useRegisterModal";
+import useLoginModal from "@/hooks/useLoginModal";
+
 import Modal from "./Modal";
 import Heading from "../Heading";
-import Input from "../Input";
+import Input from "../inputs/Input";
 import toast from "react-hot-toast";
 import Button from "../Button";
 
 const RegisterModal = () => {
     const registerModal = useRegisterModal();
+    const loginModal = useLoginModal();
     const [isLoading, setIsLoading] = useState(false);
 
     const {
@@ -43,6 +46,11 @@ const RegisterModal = () => {
             .catch(error => toast.error('Something went wrong.'))
             .finally(() => setIsLoading(false));
     }
+
+    const toggle = useCallback(() => {
+        registerModal.onClose();
+        loginModal.onOpen();
+    }, [loginModal, registerModal]);
 
     const title = (
         <>
@@ -98,12 +106,13 @@ const RegisterModal = () => {
                 label="Continue with Twitter"
                 icon={FaXTwitter}
                 onClick={() => signIn('twitter')}
+                disabled={true}
             />
             <div className="text-neutral-500 text-center mt-4 font-light">
                 <div className="flex flex-row items-center justify-center gap-2">
                     <div>Already have an account?</div>
                     <div
-                        onClick={registerModal.onClose}
+                        onClick={toggle}
                         className="text-neutral-800 cursor-pointer hover:underline"
                     >
                         Log in
