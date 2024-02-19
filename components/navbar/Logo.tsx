@@ -13,7 +13,7 @@ const Logo = () => {
         //     width="100"
         //     className="hidden md:block cursor-pointer"
         // />
-        <h1 className="hidden md:block text-3xl font-bold">
+        <h1 className="hidden md:block text-3xl font-bold cursor-pointer" onClick={() => router.push('/')}>
             <span className="text-green-700">Green</span>flats<span className="text-green-700">.</span>
         </h1>
     )
