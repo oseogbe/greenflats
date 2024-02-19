@@ -5,10 +5,13 @@ import { signOut } from "next-auth/react";
 import { AiOutlineMenu } from "react-icons/ai"
 import useOnClickOutside from "use-onclickoutside";
 
-import Avatar from "../Avatar"
-import MenuItem from "./MenuItem";
 import useRegisterModal from "@/hooks/useRegisterModal";
 import useLoginModal from "@/hooks/useLoginModal";
+import useListPropertyModal from "@/hooks/useListPropertyModal";
+
+import Avatar from "../Avatar"
+import MenuItem from "./MenuItem";
+
 import { SafeUser } from "@/types";
 
 interface UserMenuProps {
@@ -20,6 +23,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
 }) => {
     const registerModal = useRegisterModal();
     const loginModal = useLoginModal();
+    const listPropertyModal = useListPropertyModal();
     const [isOpen, setIsOpen] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
 
@@ -29,18 +33,51 @@ const UserMenu: React.FC<UserMenuProps> = ({
 
     useOnClickOutside(ref, toggleOpen);
 
+    const onListProperty = useCallback(() => {
+        if (!currentUser) {
+            return loginModal.onOpen();
+        }
+
+        listPropertyModal.onOpen();
+    }, [currentUser, loginModal, listPropertyModal]);
+
     return (
         <div className="relative">
             <div className="flex flex-row items-center gap-3">
                 <div
-                    onClick={() => { }}
-                    className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
+                    onClick={onListProperty}
+                    className="
+                        hidden 
+                        md:block 
+                        text-sm 
+                        font-semibold 
+                        py-3 
+                        px-4 
+                        rounded-full 
+                        hover:bg-neutral-100 
+                        transition 
+                        cursor-pointer
+                    "
                 >
-                    List a shortlet
+                    List a property
                 </div>
                 <div
                     onClick={toggleOpen}
-                    className="p-4 md:py-1 md:px-2 border-[1px] border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition"
+                    className="
+                        p-4 
+                        md:py-1 
+                        md:px-2 
+                        border-[1px] 
+                        border-neutral-200 
+                        flex 
+                        flex-row 
+                        items-center 
+                        gap-3 
+                        rounded-full 
+                        cursor-pointer 
+                        hover:shadow-md 
+                        transition
+                    "
                 >
                     <AiOutlineMenu />
                     <div className="hidden md:block">
