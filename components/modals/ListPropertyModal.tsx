@@ -7,7 +7,9 @@ import Modal from "./Modal";
 import Heading from "../Heading";
 import { categories } from "../navbar/Categories";
 import CategoryInput from "../inputs/CategoryInput";
+import CountrySelect from "../inputs/CountrySelect";
 import useListPropertyModal from "@/hooks/useListPropertyModal";
+import dynamic from "next/dynamic";
 
 enum STEPS {
     CATEGORY = 0,
@@ -47,6 +49,11 @@ const ListPropertyModal = () => {
     });
 
     const category = watch('category');
+    const location = watch('location');
+
+    const Map = useMemo(() => dynamic(() => import('../Map'), {
+        ssr: false
+    }), [location]);
 
     const setCustomValue = (id: string, value: any) => {
         setValue(id, value, {
@@ -87,16 +94,18 @@ const ListPropertyModal = () => {
                 "
             >
                 {
-                    categories.map((item) => (
-                        <div key={item.label} className="col-span-1">
-                            <CategoryInput
-                                onClick={(category) => setCustomValue('category', category)}
-                                selected={category === item.label}
-                                label={item.label}
-                                icon={item.icon}
-                            />
-                        </div>
-                    ))
+                    categories
+                        .filter(item => item.label !== "Trending")
+                        .map((item) => (
+                            <div key={item.label} className="col-span-1">
+                                <CategoryInput
+                                    onClick={(category) => setCustomValue('category', category)}
+                                    selected={category === item.label}
+                                    label={item.label}
+                                    icon={item.icon}
+                                />
+                            </div>
+                        ))
                 }
             </div>
         </div>
@@ -109,6 +118,11 @@ const ListPropertyModal = () => {
                     title="Where is your property located?"
                     subtitle="Help guests find you!"
                 />
+                <CountrySelect
+                    value={location}
+                    onChange={(value) => setCustomValue('location', value)}
+                />
+                <Map center={location?.latlng} />
             </div>
         );
     }
