@@ -1,11 +1,12 @@
 "use client";
 
 import { usePathname, useSearchParams } from "next/navigation";
-import { MdOutlineBedroomParent, MdOutlineMeetingRoom, MdOutlineVilla } from "react-icons/md";
+import { MdOutlineBedroomParent, MdOutlineVilla } from "react-icons/md";
+import { GiTribalMask } from "react-icons/gi";
+import { RiRestaurantLine } from "react-icons/ri";
 import { TbBeach, TbMassage } from "react-icons/tb";
 import { LiaCocktailSolid } from "react-icons/lia";
 import { IoCafeOutline, IoDiamond } from "react-icons/io5";
-import { PiOfficeChair } from "react-icons/pi";
 import { BiHotel, } from "react-icons/bi";
 import { VscFlame } from "react-icons/vsc";
 import { CgGym } from "react-icons/cg";
@@ -27,10 +28,6 @@ export const categories = [
         icon: MdOutlineBedroomParent,
     },
     {
-        label: 'Workspace',
-        icon: PiOfficeChair,
-    },
-    {
         label: 'Hotel',
         icon: BiHotel,
     },
@@ -47,8 +44,12 @@ export const categories = [
         icon: TbBeach,
     },
     {
-        label: 'Hall',
-        icon: MdOutlineMeetingRoom,
+        label: 'Museum',
+        icon: GiTribalMask
+    },
+    {
+        label: 'Restaurant',
+        icon: RiRestaurantLine
     },
     {
         label: 'Gym',
