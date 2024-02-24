@@ -31,9 +31,13 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
             }}
         >
             {({ open }) => {
+                const onOpen = () => {
+                    open();
+                }
+
                 return (
                     <div
-                        onClick={() => open()}
+                        onClick={onOpen}
                         className="
                             relative
                             cursor-pointer
