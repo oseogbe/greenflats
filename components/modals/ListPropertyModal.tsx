@@ -11,7 +11,7 @@ import Modal from "./Modal";
 import Heading from "../Heading";
 import { categories } from "../navbar/Categories";
 import CategoryInput from "../inputs/CategoryInput";
-import CountrySelect from "../inputs/CountrySelect";
+import LocationSelect from "../inputs/LocationSelect";
 import useListPropertyModal from "@/hooks/useListPropertyModal";
 import Counter from "../inputs/Counter";
 import ImageUpload from "../inputs/ImageUpload";
@@ -45,7 +45,9 @@ const ListPropertyModal = () => {
     } = useForm<FieldValues>({
         defaultValues: {
             category: '',
-            location: null,
+            state: null,
+            lga: null,
+            area: null,
             guestCount: 1,
             roomCount: 1,
             bathroomCount: 1,
@@ -57,7 +59,9 @@ const ListPropertyModal = () => {
     });
 
     const category = watch('category');
-    const location = watch('location');
+    const state = watch('state');
+    const lga = watch('lga');
+    const area = watch('area');
     const guestCount = watch('guestCount');
     const roomCount = watch('roomCount');
     const bathroomCount = watch('bathroomCount');
@@ -66,7 +70,7 @@ const ListPropertyModal = () => {
     const Map = useMemo(() => dynamic(() => import('../Map'), {
         ssr: false
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }), [location]);
+    }), [state]);
 
     const setCustomValue = (id: string, value: any) => {
         setValue(id, value, {
@@ -152,11 +156,19 @@ const ListPropertyModal = () => {
                     title="Where is your property located?"
                     subtitle="Help guests find you!"
                 />
-                <CountrySelect
-                    value={location}
-                    onChange={(value) => setCustomValue('location', value)}
+                <LocationSelect
+                    state={state}
+                    lga={lga}
+                    area={area}
+                    onStateChange={(value) => setCustomValue('state', value)}
+                    onLGAChange={(value) => setCustomValue('lga', value)}
+                    onAreaChange={(value) => setCustomValue('area', value)}
                 />
-                <Map center={location?.latlng} />
+                {state ? (
+                    <Map center={[state.latitude, state.longitude]} />
+                ) : (
+                    <Map center={[9.079851, 7.47087]} />
+                )}
             </div>
         );
     }
