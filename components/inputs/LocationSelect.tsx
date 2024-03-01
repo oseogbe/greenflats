@@ -40,7 +40,7 @@ const LocationSelect: React.FC<LocationSelectProps> = ({
     const { getAll, getLGAs, getAreas } = useStates();
 
     return (
-        <div className="flex flex-col gap-y-4">
+        <div className="flex flex-col gap-y-8">
             <Select
                 placeholder="State"
                 isClearable

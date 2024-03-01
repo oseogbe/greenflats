@@ -229,15 +229,16 @@ const ListPropertyModal = () => {
                 <Input
                     id="title"
                     label="Title"
+                    type="text"
                     disabled={isLoading}
                     register={register}
                     errors={errors}
                     required
                 />
-                <hr />
                 <Input
                     id="description"
                     label="Description"
+                    type="textarea"
                     disabled={isLoading}
                     register={register}
                     errors={errors}
