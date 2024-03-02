@@ -2,14 +2,15 @@
 
 import { usePathname, useSearchParams } from "next/navigation";
 import { MdOutlineBedroomParent, MdOutlineVilla } from "react-icons/md";
-import { GiTribalMask } from "react-icons/gi";
-import { RiRestaurantLine } from "react-icons/ri";
+import { IoCafeOutline, IoDiamondOutline } from "react-icons/io5";
+import { HiOutlinePaintBrush } from "react-icons/hi2";
 import { TbBeach, TbMassage } from "react-icons/tb";
-import { LiaCocktailSolid } from "react-icons/lia";
-import { IoCafeOutline, IoDiamond } from "react-icons/io5";
-import { BiHotel, } from "react-icons/bi";
+import { LiaCocktailSolid, LiaDumbbellSolid } from "react-icons/lia";
+import { RiRestaurantLine } from "react-icons/ri";
+import { PiPopcornDuotone } from "react-icons/pi";
+import { GiDramaMasks } from "react-icons/gi";
 import { VscFlame } from "react-icons/vsc";
-import { CgGym } from "react-icons/cg";
+import { BiHotel, } from "react-icons/bi";
 
 import Container from "../Container";
 import CategoryBox from "../CategoryBox";
@@ -33,7 +34,7 @@ export const categories = [
     },
     {
         label: 'Luxury',
-        icon: IoDiamond,
+        icon: IoDiamondOutline,
     },
     {
         label: 'Café',
@@ -45,15 +46,23 @@ export const categories = [
     },
     {
         label: 'Museum',
-        icon: GiTribalMask
+        icon: GiDramaMasks,
+    },
+    {
+        label: 'Art Gallery',
+        icon: HiOutlinePaintBrush,
+    },
+    {
+        label: 'Cinema',
+        icon: PiPopcornDuotone,
     },
     {
         label: 'Restaurant',
-        icon: RiRestaurantLine
+        icon: RiRestaurantLine,
     },
     {
         label: 'Gym',
-        icon: CgGym,
+        icon: LiaDumbbellSolid,
     },
     {
         label: 'Lounge',

@@ -125,6 +125,11 @@ const UserMenu: React.FC<UserMenuProps> = ({
                                     onClick={() => { }}
                                     className="font-semibold"
                                 />
+                                <MenuItem
+                                    label="List a property"
+                                    onClick={onListProperty}
+                                    className="font-semibold"
+                                />
                                 <hr />
                                 <MenuItem
                                     label="Account"

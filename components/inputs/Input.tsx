@@ -1,7 +1,7 @@
 "use client";
 
 import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
-import { BiDollar } from "react-icons/bi";
+import { TbCurrencyNaira } from "react-icons/tb";
 
 interface InputProps {
     id: string;
@@ -27,34 +27,64 @@ const Input: React.FC<InputProps> = ({
     return (
         <div className="w-full relative">
             {formatPrice && (
-                <BiDollar
+                <TbCurrencyNaira
                     size={24}
                     className="text-neutral-700 absolute top-5 left-2"
                 />
             )}
-            <input
-                id={id}
-                disabled={disabled}
-                {...register(id, { required })}
-                placeholder=" "
-                type={type}
-                className={`
-                    peer 
-                    w-full 
-                    p-4 
-                    pt-6 
-                    font-light 
-                    bg-white 
-                    border-2 
-                    rounded-md 
-                    outline-none 
-                    transition 
-                    disabled:opacity-70 
-                    disabled:cursor-not-allowed
-                    ${formatPrice ? 'pl-9' : 'pl-4'}
-                    ${errors[id] ? 'border-rose-500 focus:border-rose-500' : 'border-neutral-300 focus:border-black'}
-                `}
-            />
+            {
+                type === "textarea" ? (
+                    <textarea
+                        id={id}
+                        disabled={disabled}
+                        {...register(id, { required })}
+                        placeholder=" "
+                        rows={5}
+                        className={`
+                            peer 
+                            w-full 
+                            p-4 
+                            pt-6 
+                            font-light 
+                            bg-white 
+                            border-2 
+                            rounded-md 
+                            outline-none 
+                            transition 
+                            disabled:opacity-70 
+                            disabled:cursor-not-allowed
+                            ${formatPrice ? 'pl-9' : 'pl-4'}
+                            ${errors[id] ? 'border-rose-500 focus:border-rose-500' : 'border-neutral-300 focus:border-black'}
+                            resize-none
+                        `}
+                    ></textarea>
+                ) : (
+                    <input
+                        id={id}
+                        disabled={disabled}
+                        {...register(id, { required })}
+                        placeholder=" "
+                        type={type}
+                        className={`
+                            peer 
+                            w-full 
+                            p-4 
+                            pt-6 
+                            font-light 
+                            bg-white 
+                            border-2 
+                            rounded-md 
+                            outline-none 
+                            transition 
+                            disabled:opacity-70 
+                            disabled:cursor-not-allowed
+                            ${formatPrice ? 'pl-9' : 'pl-4'}
+                            ${errors[id] ? 'border-rose-500 focus:border-rose-500' : 'border-neutral-300 focus:border-black'}
+                        `}
+                    />
+                )
+            }
+
             <label
                 className={`
                     absolute
