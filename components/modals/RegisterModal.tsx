@@ -40,8 +40,9 @@ const RegisterModal = () => {
 
         axios.post('/api/register', data)
             .then(() => {
-                registerModal.onClose()
-                toast.success('Account created')
+                toast.success('Account created');
+                registerModal.onClose();
+                loginModal.onOpen();
             })
             .catch(error => toast.error('Something went wrong.'))
             .finally(() => setIsLoading(false));
