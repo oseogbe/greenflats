@@ -49,7 +49,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
         const start = new Date(reservation.startDate);
         const end = new Date(reservation.endDate);
 
-        return `&#8358;${format(start, 'PP')} - &#8358;${format(end, 'PP')}`;
+        return `${format(start, 'PP')} - ${format(end, 'PP')}`;
     }, [reservation]);
 
     return (
