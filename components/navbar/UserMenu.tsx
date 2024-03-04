@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { AiOutlineMenu } from "react-icons/ai"
 import useOnClickOutside from "use-onclickoutside";
@@ -21,6 +22,7 @@ interface UserMenuProps {
 const UserMenu: React.FC<UserMenuProps> = ({
     currentUser
 }) => {
+    const router = useRouter();
     const registerModal = useRegisterModal();
     const loginModal = useLoginModal();
     const listPropertyModal = useListPropertyModal();
@@ -107,7 +109,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                             <>
                                 <MenuItem
                                     label="Trips"
-                                    onClick={() => { }}
+                                    onClick={() => router.push('/trips')}
                                     className="font-semibold"
                                 />
                                 <MenuItem
