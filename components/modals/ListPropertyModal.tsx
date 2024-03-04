@@ -91,7 +91,7 @@ const ListPropertyModal = () => {
         setIsLoading(true);
         axios.post('/api/listings', data)
             .then(() => {
-                toast.success("Property Listing created!");
+                toast.success("Property listing created!");
                 router.refresh();
                 reset();
                 setStep(STEPS.CATEGORY);
