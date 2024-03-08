@@ -54,7 +54,10 @@ model Listing {
   category      String
   roomCount     Int
   bathroomCount Int
-  guestCount    Int
+  adultCount    Int
+  childrenCount Int
+  infantCount   Int
+  petCount      Int
   state         String
   lga           String
   area          String

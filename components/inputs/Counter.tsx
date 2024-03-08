@@ -7,6 +7,7 @@ interface CounterProps {
     title: string;
     subtitle: string;
     value: number;
+    minValue?: number;
     onChange: (value: number) => void;
 }
 
@@ -14,6 +15,7 @@ const Counter: React.FC<CounterProps> = ({
     title,
     subtitle,
     value,
+    minValue = 1,
     onChange
 }) => {
     const onAdd = useCallback(() => {
@@ -21,9 +23,9 @@ const Counter: React.FC<CounterProps> = ({
     }, [onChange, value]);
 
     const onReduce = useCallback(() => {
-        if (value === 1) return 1
+        if (value === minValue) return minValue
         onChange(value - 1);
-    }, [onChange, value]);
+    }, [onChange, value, minValue]);
 
     return (
         <div className="flex flex-row items-center justify-between">

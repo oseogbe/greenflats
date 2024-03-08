@@ -18,8 +18,11 @@ interface ListingInfo {
     } | undefined;
     description: string;
     roomCount: number;
-    guestCount: number;
     bathroomCount: number;
+    adultCount: number;
+    childrenCount: number;
+    infantCount: number;
+    petCount: number;
     state: string;
 }
 
@@ -28,8 +31,11 @@ const ListingInfo: React.FC<ListingInfo> = ({
     category,
     description,
     roomCount,
-    guestCount,
     bathroomCount,
+    adultCount,
+    childrenCount,
+    infantCount,
+    petCount,
     state,
 }) => {
     const { getByValue } = useStates();
@@ -65,10 +71,6 @@ const ListingInfo: React.FC<ListingInfo> = ({
                         text-neutral-500
                     "
                 >
-                    <div>
-                        {guestCount} guests
-                    </div>
-                    &middot;
                     <div>
                         {roomCount} rooms
                     </div>

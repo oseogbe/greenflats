@@ -48,7 +48,10 @@ const ListPropertyModal = () => {
             state: null,
             lga: null,
             area: null,
-            guestCount: 1,
+            adultCount: 1,
+            childrenCount: 0,
+            infantCount: 0,
+            petCount: 0,
             roomCount: 1,
             bathroomCount: 1,
             imageSrc: '',
@@ -62,7 +65,10 @@ const ListPropertyModal = () => {
     const state = watch('state');
     const lga = watch('lga');
     const area = watch('area');
-    const guestCount = watch('guestCount');
+    const adultCount = watch('adultCount');
+    const childrenCount = watch('childrenCount');
+    const infantCount = watch('infantCount');
+    const petCount = watch('petCount');
     const roomCount = watch('roomCount');
     const bathroomCount = watch('bathroomCount');
     const imageSrc = watch('imageSrc');
@@ -181,10 +187,28 @@ const ListPropertyModal = () => {
                     subtitle="What amenities do you have?"
                 />
                 <Counter
-                    title="Guests"
-                    subtitle="How many guests do you allow?"
-                    value={guestCount}
-                    onChange={(value) => setCustomValue('guestCount', value)}
+                    title="Adults"
+                    subtitle="How many adults are allowed?"
+                    value={adultCount}
+                    onChange={(value) => setCustomValue('adultCount', value)}
+                />
+                <Counter
+                    title="Children"
+                    subtitle="How many kids are allowed?"
+                    value={childrenCount}
+                    onChange={(value) => setCustomValue('childrenCount', value)}
+                />
+                <Counter
+                    title="Infants"
+                    subtitle="How many infants are allowed?"
+                    value={infantCount}
+                    onChange={(value) => setCustomValue('infantCount', value)}
+                />
+                <Counter
+                    title="Pets"
+                    subtitle="How many pets are allowed?"
+                    value={petCount}
+                    onChange={(value) => setCustomValue('petCount', value)}
                 />
                 <hr />
                 <Counter

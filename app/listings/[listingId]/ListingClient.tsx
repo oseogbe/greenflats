@@ -123,8 +123,11 @@ const ListingClient: React.FC<ListingClientProps> = ({
                             category={category}
                             description={listing.description}
                             roomCount={listing.roomCount}
-                            guestCount={listing.guestCount}
                             bathroomCount={listing.bathroomCount}
+                            adultCount={listing.adultCount}
+                            childrenCount={listing.childrenCount}
+                            infantCount={listing.infantCount}
+                            petCount={listing.petCount}
                             state={listing.state}
                         />
                         <div className="
