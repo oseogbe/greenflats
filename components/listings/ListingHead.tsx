@@ -5,6 +5,7 @@ import { SafeUser } from "@/types";
 import Heading from "../Heading";
 import Image from "next/image";
 import HeartButton from "../HeartButton";
+import ArrowBack from "../ArrowBack";
 
 interface ListingHeadProps {
     title: string;
@@ -25,10 +26,15 @@ const ListingHead: React.FC<ListingHeadProps> = ({
 }) => {
     return (
         <>
-            <Heading
-                title={title}
-                subtitle={`${area}, ${state}`}
-            />
+            <div className="relative">
+                <Heading
+                    title={title}
+                    subtitle={`${area}, ${state}`}
+                />
+                <div className="absolute top-0 right-0 md:hidden">
+                    <ArrowBack />
+                </div>
+            </div>
             <div
                 className="
                     w-full
