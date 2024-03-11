@@ -30,7 +30,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                 multiple: true,
                 sources: ['local', 'url', 'instagram', 'dropbox', 'google_drive'],
                 maxFiles: 5,
-                maxImageFileSize: 3000000, // 3mb
+                maxImageFileSize: 1000000, // 1mb
                 clientAllowedFormats: ['jpg', 'jpeg', 'png']
             }}
         >
