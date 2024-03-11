@@ -83,7 +83,6 @@ const Modal: React.FC<ModalProps> = ({
                 inset-0 
                 z-50 
                 outline-none 
-                touch-none
                 focus:outline-none 
                 bg-neutral-800/70
             "
@@ -91,7 +90,7 @@ const Modal: React.FC<ModalProps> = ({
             <div
                 ref={ref}
                 className="
-                    relative 
+                    fixed 
                     w-full 
                     md:w-4/6 
                     lg:w-3/6 
