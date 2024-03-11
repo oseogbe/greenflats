@@ -62,7 +62,7 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
       `}
     >
       <Icon size={26} />
-      <div className="font-medium text-sm">
+      <div className="w-max font-medium text-sm">
         {label}
       </div>
     </div>
