@@ -42,3 +42,25 @@ body,
   width: 100% !important;
   font-size: 16px !important;
 }
+
+.slick-slide > div {
+  aspect-ratio: 1;
+}
+
+.slick-slide > div > img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.slick-dots {
+  bottom: 10px !important;
+}
+
+.slick-prev {
+  left: 10px !important;
+  z-index: 10;
+}
+
+.slick-next {
+  right: 10px !important;
+}

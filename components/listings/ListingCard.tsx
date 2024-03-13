@@ -4,10 +4,14 @@ import { useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { format } from "date-fns";
+import Slider from "react-slick";
 
 import { SafeListing, SafeReservation, SafeUser } from "@/types";
 import HeartButton from "../HeartButton";
 import Button from "../Button";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 interface ListingCardProps {
     data: SafeListing;
@@ -33,6 +37,15 @@ const ListingCard: React.FC<ListingCardProps> = ({
     const state = data.state;
     const area = data.area;
 
+    const settings = {
+        arrows: true,
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+    };
+
     const handleCancel = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
         if (disabled) return;
@@ -54,11 +67,8 @@ const ListingCard: React.FC<ListingCardProps> = ({
 
     return (
         <div
-            onClick={() => router.push(`/listings/${data.id}`)}
             className="
                 col-span-1 
-                cursor-pointer 
-                group
             "
         >
             <div
@@ -78,18 +88,17 @@ const ListingCard: React.FC<ListingCardProps> = ({
                         rounded-xl
                     "
                 >
-                    <Image
-                        src={data.imageSrc}
-                        alt="Listing"
-                        fill
-                        className="
-                            object-cover
-                            h-full
-                            w-full
-                            group-hover:scale-110
-                            transition
-                        "
-                    />
+                    <Slider {...settings}>
+                        {data.images.map((image, i) => (
+                            <Image
+                                key={i}
+                                src={image}
+                                alt="greendest property image"
+                                height={400}
+                                width={400}
+                            />
+                        ))}
+                    </Slider>
                     <div
                         className="
                             absolute 
@@ -103,29 +112,40 @@ const ListingCard: React.FC<ListingCardProps> = ({
                         />
                     </div>
                 </div>
-                <div className="font-semibold text-lg">
-                    {area}, <span className="font-thin">{state}</span>
-                </div>
-                <div className="font-light text-neutral-500">
-                    {reservationDate || data.category}
-                </div>
-                <div className="flex flex-row items-center gap-1">
-                    <div className="font-semibold">
-                        &#8358; {price}
+                <div
+                    onClick={() => router.push(`/listings/${data.id}`)}
+                    className="
+                        flex 
+                        flex-col 
+                        gap-2
+                        cursor-pointer 
+                    "
+                >
+                    <div className="font-semibold text-lg">
+                        {area}, <span className="font-thin">{state}</span>
                     </div>
-                    {!reservation && (
-                        <div className="font-light">/ night</div>
+                    <div className="font-light text-neutral-500">
+                        {reservationDate || data.category}
+                    </div>
+                    <div className="flex flex-row items-center gap-1">
+                        <div className="font-semibold">
+                            &#8358; {price}
+                        </div>
+                        {!reservation && (
+                            <div className="font-light">/ night</div>
+                        )}
+                    </div>
+                    {onAction && actionLabel && (
+                        <Button
+                            disabled={disabled}
+                            small
+                            label={actionLabel}
+                            onClick={handleCancel}
+                        />
                     )}
                 </div>
-                {onAction && actionLabel && (
-                    <Button
-                        disabled={disabled}
-                        small
-                        label={actionLabel}
-                        onClick={handleCancel}
-                    />
-                )}
             </div>
+
         </div>
     )
 }
