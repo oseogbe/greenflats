@@ -27,7 +27,11 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
             onUpload={handleUpload}
             uploadPreset="yq7kaqus"
             options={{
-                maxFiles: 1
+                multiple: true,
+                sources: ['local', 'url', 'instagram', 'dropbox', 'google_drive'],
+                maxFiles: 10,
+                maxImageFileSize: 1000000, // 1mb
+                clientAllowedFormats: ['jpg', 'jpeg', 'png']
             }}
         >
             {({ open }) => {

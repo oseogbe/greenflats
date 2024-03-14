@@ -90,7 +90,7 @@ const Modal: React.FC<ModalProps> = ({
             <div
                 ref={ref}
                 className="
-                    relative 
+                    fixed 
                     w-full 
                     md:w-4/6 
                     lg:w-3/6 

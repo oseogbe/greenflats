@@ -15,6 +15,7 @@ model User {
   name           String?
   email          String?   @unique
   emailVerified  DateTime?
+  phoneNumbers   String[]
   image          String?
   hashedPassword String?
   createdAt      DateTime  @default(now())
@@ -49,7 +50,7 @@ model Listing {
   id            String   @id @default(auto()) @map("_id") @db.ObjectId
   title         String
   description   String
-  imageSrc      String
+  images        String[]
   createdAt     DateTime @default(now())
   category      String
   roomCount     Int

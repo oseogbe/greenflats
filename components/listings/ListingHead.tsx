@@ -1,14 +1,20 @@
 "use client";
 
-import { SafeUser } from "@/types";
+import { useState } from "react";
+import Image from "next/image";
+import { PiDotsNineLight } from "react-icons/pi";
 
 import Heading from "../Heading";
-import Image from "next/image";
 import HeartButton from "../HeartButton";
+import ArrowBack from "../ArrowBack";
+import Button from "../Button";
+
+import { SafeUser } from "@/types";
+import ImageGallery from "../ImageGallery";
 
 interface ListingHeadProps {
     title: string;
-    imageSrc: string;
+    images: string[];
     state: string;
     area: string;
     id: string;
@@ -17,18 +23,25 @@ interface ListingHeadProps {
 
 const ListingHead: React.FC<ListingHeadProps> = ({
     title,
-    imageSrc,
+    images,
     state,
     area,
     id,
     currentUser
 }) => {
+    const [isOpen, setIsOpen] = useState(false);
+
     return (
         <>
-            <Heading
-                title={title}
-                subtitle={`${area}, ${state}`}
-            />
+            <div className="relative">
+                <Heading
+                    title={title}
+                    subtitle={`${area}, ${state}`}
+                />
+                <div className="absolute top-0 right-0 md:hidden">
+                    <ArrowBack />
+                </div>
+            </div>
             <div
                 className="
                     w-full
@@ -40,7 +53,7 @@ const ListingHead: React.FC<ListingHeadProps> = ({
             >
                 <Image
                     alt={`${title}`}
-                    src={imageSrc}
+                    src={images[0]}
                     fill
                     className="object-cover w-full"
                 />
@@ -48,6 +61,22 @@ const ListingHead: React.FC<ListingHeadProps> = ({
                     <HeartButton
                         listingId={id}
                         currentUser={currentUser}
+                    />
+                </div>
+                <div className="absolute bottom-5 right-5">
+                    <Button
+                        label="Show all photos"
+                        icon={PiDotsNineLight}
+                        onClick={() => setIsOpen(true)}
+                        width={220}
+                        outline
+                    />
+                    <ImageGallery
+                        isOpen={isOpen}
+                        onClose={() => setIsOpen(false)}
+                        slides={images.map(image => ({
+                            src: image
+                        }))}
                     />
                 </div>
             </div>

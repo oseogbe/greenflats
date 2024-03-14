@@ -30,10 +30,14 @@
     "react-icons": "^5.0.1",
     "react-leaflet": "^4.2.1",
     "react-select": "^5.8.0",
+    "react-slick": "^0.30.2",
+    "sharp": "^0.33.2",
+    "slick-carousel": "^1.8.1",
     "tailwind-merge": "^2.2.1",
     "tailwind-scrollbar-hide": "^1.1.7",
     "use-onclickoutside": "^0.4.1",
     "world-countries": "^5.0.0",
+    "yet-another-react-lightbox": "^3.17.1",
     "zustand": "^4.5.0"
   },
   "devDependencies": {
@@ -43,6 +47,7 @@
     "@types/react": "^18",
     "@types/react-date-range": "^1.4.9",
     "@types/react-dom": "^18",
+    "@types/react-slick": "^0.23.13",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.1.0",

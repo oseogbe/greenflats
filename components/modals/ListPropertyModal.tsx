@@ -54,7 +54,7 @@ const ListPropertyModal = () => {
             petCount: 0,
             roomCount: 1,
             bathroomCount: 1,
-            imageSrc: '',
+            images: [],
             price: 1,
             title: '',
             description: '',
@@ -71,7 +71,7 @@ const ListPropertyModal = () => {
     const petCount = watch('petCount');
     const roomCount = watch('roomCount');
     const bathroomCount = watch('bathroomCount');
-    const imageSrc = watch('imageSrc');
+    const images = watch('images');
 
     const Map = useMemo(() => dynamic(() => import('../Map'), {
         ssr: false
@@ -236,8 +236,8 @@ const ListPropertyModal = () => {
                     subtitle="Show guests what your place looks like!"
                 />
                 <ImageUpload
-                    value={imageSrc}
-                    onChange={(value) => setCustomValue('imageSrc', value)}
+                    value={images}
+                    onChange={(value) => setCustomValue('images', value)}
                 />
             </div>
         )
