@@ -37,6 +37,7 @@
     "tailwind-scrollbar-hide": "^1.1.7",
     "use-onclickoutside": "^0.4.1",
     "world-countries": "^5.0.0",
+    "yet-another-react-lightbox": "^3.17.1",
     "zustand": "^4.5.0"
   },
   "devDependencies": {

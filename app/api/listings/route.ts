@@ -17,7 +17,7 @@ export async function POST(
     const {
         title,
         description,
-        imageSrc,
+        images,
         category,
         roomCount,
         bathroomCount,
@@ -41,7 +41,7 @@ export async function POST(
         data: {
             title,
             description,
-            imageSrc,
+            images,
             category,
             roomCount,
             bathroomCount,

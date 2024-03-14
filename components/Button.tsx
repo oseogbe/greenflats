@@ -9,6 +9,7 @@ interface ButtonProps {
     outline?: boolean;
     small?: boolean;
     icon?: IconType;
+    width?: number;
     className?: string;
 }
 
@@ -19,6 +20,7 @@ const Button: React.FC<ButtonProps> = ({
     outline,
     small,
     icon: Icon,
+    width,
     className,
 }) => {
     return (
@@ -31,7 +33,6 @@ const Button: React.FC<ButtonProps> = ({
                 disabled:cursor-not-allowed 
                 rounded-lg hover:opacity-80 
                 transition 
-                w-full 
                 ${outline ? 'bg-white' : 'bg-green-600'} 
                 ${outline ? 'border-black' : 'bg-green-600'} 
                 ${outline ? 'text-black' : 'text-white'}
@@ -40,6 +41,9 @@ const Button: React.FC<ButtonProps> = ({
                 ${small ? 'font-light' : 'font-semibold'}
                 ${small ? 'border-[1px]' : 'border-2'}
             `}
+            style={{
+                width: width ? `${width}px` : '100%'
+            }}
         >
             {Icon && (
                 <Icon
