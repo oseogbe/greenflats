@@ -1,41 +1,39 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Image from "next/image";
 import { DragDropContext, Draggable, DropResult, Droppable } from "react-beautiful-dnd";
+
 import { IoIosImages } from "react-icons/io";
 import { BiTrash } from "react-icons/bi";
 
 interface ImageUploadProps {
     onChange: (value: File[]) => void;
-    value: File[];
+    images: File[];
 }
 
 const ImageUpload: React.FC<ImageUploadProps> = ({
     onChange,
-    value
+    images
 }) => {
-    const [images, setImages] = useState<File[]>([]);
-
-    const handleUploadImages = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleUploadImages = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         const newImages = e.target.files;
         if (!newImages) return;
         const newImagesArray = Array.from(newImages);
-        setImages((prevImages) => [...prevImages, ...newImagesArray]);
-        console.log(images);
-    }
+        onChange([...images, ...newImagesArray]);
+    }, [images, onChange]);
 
-    const handleDragImage = (result: DropResult) => {
+    const handleDragImage = useCallback((result: DropResult) => {
         if (!result.destination) return;
         const items = Array.from(images);
         const [recordedItem] = items.splice(result.source.index, 1);
         items.splice(result.destination.index, 0, recordedItem);
-        setImages(items);
-    }
+        onChange(items);
+    }, [images, onChange]);
 
-    const handleRemoveImage = (index: number) => {
-        setImages((prevImages) => prevImages.filter((_, i) => i !== index));
-    }
+    const handleRemoveImage = useCallback((index: number) => {
+        onChange(images.filter((_, i) => i !== index));
+    }, [images, onChange]);
 
     return (
         <>
