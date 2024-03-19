@@ -73,7 +73,7 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
         alt="property type icon"
       />
       */}
-      <div className="w-10 h-10 rounded-full flex items-center justify-center text-green-500 border border-neutral-500">{label.substr(0, 2)}</div>
+      <div className="w-10 h-10 rounded-full flex items-center justify-center text-green-500 border border-neutral-500">{label.substring(0, 2)}</div>
       <div className="w-max font-medium text-sm">
         {label}
       </div>
