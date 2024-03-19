@@ -9,7 +9,7 @@ import Image from "next/image";
 interface CategoryBoxProps {
   label: string;
   // icon: IconType;
-  icon: string;
+  icon?: string;
   selected?: boolean;
 }
 

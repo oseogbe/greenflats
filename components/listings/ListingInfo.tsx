@@ -14,7 +14,7 @@ interface ListingInfo {
     category?: {
         label: string;
         description: string;
-        icon: IconType;
+        // icon: IconType;
     } | undefined;
     description: string;
     roomCount: number;
@@ -83,7 +83,7 @@ const ListingInfo: React.FC<ListingInfo> = ({
             <hr />
             {category && (
                 <ListingCategory
-                    icon={category.icon}
+                    // icon={category.icon}
                     label={category.label}
                     description={category.description}
                 />
