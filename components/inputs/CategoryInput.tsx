@@ -5,6 +5,7 @@ import { IconType } from "react-icons";
 interface CategoryInputProps {
     // icon: IconType;
     label: string;
+    description: string;
     selected?: boolean;
     onClick: (value: string) => void;
 }
@@ -12,6 +13,7 @@ interface CategoryInputProps {
 const CategoryInput: React.FC<CategoryInputProps> = ({
     // icon: Icon,
     label,
+    description,
     selected,
     onClick
 }) => {
@@ -35,6 +37,9 @@ const CategoryInput: React.FC<CategoryInputProps> = ({
             <div className="w-10 h-10 rounded-full flex items-center justify-center text-green-500 border border-neutral-500">{label.substring(0, 2)}</div>
             <div className="font-semibold">
                 {label}
+            </div>
+            <div className="text-sm text-neutral-500">
+                {description}
             </div>
         </div>
     )

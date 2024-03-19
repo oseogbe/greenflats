@@ -160,6 +160,7 @@ const ListPropertyModal = () => {
                                     onClick={(category) => setCustomValue('category', category)}
                                     selected={category === item.label}
                                     label={item.label}
+                                    description={item.description}
                                 // icon={item.icon}
                                 />
                             </div>
