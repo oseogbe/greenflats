@@ -105,7 +105,9 @@ const Modal: React.FC<ModalProps> = ({
                 <div className={`
                     translate 
                     duration-300 
-                    h-full 
+                    h-full
+                    max-h-[85vh]
+                    overflow-y-auto 
                     ${showModal ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}
                 `}>
                     {/* Content */}
