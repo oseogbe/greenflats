@@ -95,20 +95,34 @@ const ListPropertyModal = () => {
             return onNext();
         }
         setIsLoading(true);
-        axios.post('/api/listings', data)
-            .then(() => {
-                toast.success("Property listing created!");
-                router.refresh();
-                reset();
-                setStep(STEPS.CATEGORY);
-                listPropertyModal.onClose();
-            }).catch(() => {
-                toast.error("An error occurred.");
-            }).finally(() => {
-                setIsLoading(false);
-            });
-    }
 
+        const imagePromises = images.map((image: File) => {
+            const formData = new FormData();
+            formData.append("file", image);
+            formData.append("upload_preset", "yq7kaqus");
+            return axios.post(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`, formData)
+                .then(res => res.data.secure_url);
+        });
+
+        Promise.all(imagePromises).then(result => {
+            console.log("result", result);
+            setCustomValue('images', result);
+            // axios.post('/api/listings', data)
+            //     .then(() => {
+            //         toast.success("Property listing created!");
+            //         router.refresh();
+            //         reset();
+            //         setStep(STEPS.CATEGORY);
+            //         listPropertyModal.onClose();
+            //     }).catch(() => {
+            //         toast.error("An error occurred.");
+            //     }).finally(() => {
+            //         setIsLoading(false);
+            //     });
+        }).catch(error => {
+            console.error("Error uploading images:", error);
+        })
+    }
 
     const actionLabel = useMemo(() => {
         if (step === STEPS.PRICE) return "Create";
@@ -232,12 +246,12 @@ const ListPropertyModal = () => {
         bodyContent = (
             <div className="flex flex-col gap-8">
                 <Heading
-                    title="Add a photo of your place"
+                    title="Add some photos of your place"
                     subtitle="Show guests what your place looks like!"
                 />
                 <ImageUpload
-                    value={images}
-                    onChange={(value) => setCustomValue('images', value)}
+                    images={images}
+                    onChange={(images) => setCustomValue('images', images)}
                 />
             </div>
         )
