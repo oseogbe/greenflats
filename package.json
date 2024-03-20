@@ -10,6 +10,7 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@hello-pangea/dnd": "^16.5.0",
     "@next-auth/prisma-adapter": "^1.0.7",
     "@prisma/client": "^5.9.1",
     "axios": "^1.6.7",
@@ -23,7 +24,6 @@
     "next-cloudinary": "^5.20.0",
     "query-string": "^8.2.0",
     "react": "^18",
-    "react-beautiful-dnd": "^13.1.1",
     "react-date-range": "^2.0.0-alpha.4",
     "react-dom": "^18",
     "react-hook-form": "^7.50.1",
@@ -46,7 +46,6 @@
     "@types/leaflet": "^1.9.8",
     "@types/node": "^20",
     "@types/react": "^18",
-    "@types/react-beautiful-dnd": "^13.1.8",
     "@types/react-date-range": "^1.4.9",
     "@types/react-dom": "^18",
     "@types/react-slick": "^0.23.13",

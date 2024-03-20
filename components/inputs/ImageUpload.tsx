@@ -1,8 +1,8 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import Image from "next/image";
-import { DragDropContext, Draggable, DropResult, Droppable } from "react-beautiful-dnd";
+import { DragDropContext, Draggable, DraggingStyle, DropResult, Droppable, NotDraggingStyle } from "@hello-pangea/dnd";
 
 import { IoIosImages } from "react-icons/io";
 import { BiTrash } from "react-icons/bi";
@@ -26,8 +26,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     const handleDragImage = useCallback((result: DropResult) => {
         if (!result.destination) return;
         const items = Array.from(images);
-        const [recordedItem] = items.splice(result.source.index, 1);
-        items.splice(result.destination.index, 0, recordedItem);
+        const [reorderedItem] = items.splice(result.source.index, 1);
+        items.splice(result.destination.index, 0, reorderedItem);
         onChange(items);
     }, [images, onChange]);
 
@@ -38,12 +38,12 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     return (
         <>
             <DragDropContext onDragEnd={handleDragImage}>
-                <Droppable droppableId="images" direction="horizontal">
+                <Droppable droppableId="images">
                     {(provided) => (
                         <div
-                            className="h-full max-h-[50vh] w-full overflow-y-auto"
-                            {...provided.droppableProps}
                             ref={provided.innerRef}
+                            {...provided.droppableProps}
+                            className="h-full max-h-[50vh] w-full overflow-y-auto"
                         >
                             {
                                 images.length < 1 && (
@@ -84,8 +84,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         {images.map((image, index) => {
                                             return (
-                                                <Draggable key={index} draggableId={index.toString()} index={index}>
-                                                    {(provided) => (
+                                                <Draggable key={image.name} draggableId={image.name} index={index}>
+                                                    {(provided, snapshot) => (
                                                         <div
                                                             className="relative w-full aspect-square"
                                                             ref={provided.innerRef}
@@ -98,7 +98,11 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                                                                 fill
                                                                 className="object-cover"
                                                             />
-                                                            <button type="button" className="absolute top-3 right-3 p-2 rounded-full bg-white" onClick={() => handleRemoveImage(index)}>
+                                                            <button
+                                                                type="button"
+                                                                className="absolute top-3 right-3 p-2 rounded-full bg-white"
+                                                                onClick={() => handleRemoveImage(index)}
+                                                            >
                                                                 <BiTrash size={16} className="text-red-500" />
                                                             </button>
                                                         </div>
@@ -138,6 +142,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                                     </div>
                                 )
                             }
+                            {provided.placeholder}
                         </div>
                     )}
                 </Droppable>
