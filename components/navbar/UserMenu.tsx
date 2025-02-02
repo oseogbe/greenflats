@@ -33,7 +33,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
         setIsOpen(value => !value);
     }, []);
 
-    useOnClickOutside(ref, toggleOpen);
+    useOnClickOutside(ref, () => setIsOpen(false));
 
     const onListProperty = useCallback(() => {
         if (!currentUser) {
@@ -44,7 +44,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
     }, [currentUser, loginModal, listPropertyModal]);
 
     return (
-        <div className="relative">
+        <div className="relative" ref={ref}>
             <div className="flex flex-row items-center gap-3">
                 <div
                     onClick={onListProperty}
@@ -90,7 +90,6 @@ const UserMenu: React.FC<UserMenuProps> = ({
 
             {isOpen &&
                 <div
-                    ref={ref}
                     className="
                         absolute 
                         rounded-xl 
