@@ -17,6 +17,9 @@ const nunito = Nunito({ subsets: ["latin"], weight: ["400"] });
 export const metadata: Metadata = {
   title: "Greenflats.",
   description: "Book Your Stay, Live Your Way",
+  keywords: "booking, properties, online booking, property booking, property listing, apartments, nigerian apartments, apartment rentals, shortlets, service apartments, vacation, vacation rentals, budget rentals, hotels, travel accommodations, nigerian properties, travel accommodations, greenflats",
+  authors: [{ name: "Greenflats", url: "https://greenflats.vercel.app" }],
+  viewport: "width=device-width, initial-scale=1.0",
 };
 
 // We’ve partnered with apartment buildings and shortlets across Nigeria that let you rent a place to live and lease it part-time. 
