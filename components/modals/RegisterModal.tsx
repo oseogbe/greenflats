@@ -55,7 +55,7 @@ const RegisterModal = () => {
 
     const title = (
         <>
-            Welcome to <span className="text-green-700">Green</span>dest<span className="text-green-700">.</span>
+            Welcome to <span className="text-green-700">Green</span>flats<span className="text-green-700">.</span>
         </>
     )
 

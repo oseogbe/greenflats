@@ -93,7 +93,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
                             <Image
                                 key={i}
                                 src={image}
-                                alt="greendest property image"
+                                alt="a property listed on greenflats"
                                 height={400}
                                 width={400}
                             />

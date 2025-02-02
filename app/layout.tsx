@@ -15,7 +15,7 @@ import getCurrentUser from "./actions/getCurrentUser";
 const nunito = Nunito({ subsets: ["latin"], weight: ["400"] });
 
 export const metadata: Metadata = {
-  title: "Greendest.",
+  title: "Greenflats.",
   description: "Book Your Stay, Live Your Way",
 };
 

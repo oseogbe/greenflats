@@ -146,9 +146,10 @@ const Categories = () => {
                 className="
                     pt-4
                     flex
-                    flex-row
                     gap-x-12
                     overflow-x-auto
+                    scrollbar-thumb-green-100
+                    scrollbar-thin
                 "
             >
                 {

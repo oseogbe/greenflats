@@ -94,7 +94,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                                                         >
                                                             <Image
                                                                 src={URL.createObjectURL(image)}
-                                                                alt="greendest property image"
+                                                                alt="a property listed on greenflats"
                                                                 fill
                                                                 className="object-cover"
                                                             />
