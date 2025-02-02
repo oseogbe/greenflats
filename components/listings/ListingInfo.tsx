@@ -89,8 +89,11 @@ const ListingInfo: React.FC<ListingInfo> = ({
                 />
             )}
             <hr />
-            <div className="text-lg font-light text-neutral-500">
-                {description}
+            <div className="font-light text-neutral-500">
+                {/* {description} */}
+                {description.split("\n").map((item, index) => (
+                    <p key={index} className="mb-3">{item}</p>
+                ))}
             </div>
             <hr />
             <Map center={[latitude, longitude]} />
