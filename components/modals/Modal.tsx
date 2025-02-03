@@ -74,12 +74,7 @@ const Modal: React.FC<ModalProps> = ({
     return (
         <div
             className="
-                flex 
-                justify-center 
-                items-center 
-                overflow-x-hidden 
-                overflow-y-auto 
-                fixed 
+                relative 
                 inset-0 
                 z-50 
                 outline-none 
@@ -91,22 +86,21 @@ const Modal: React.FC<ModalProps> = ({
                 ref={ref}
                 className="
                     fixed 
+                    left-1/2
+                    -translate-x-1/2
+                    top-[86px]
                     w-full 
                     md:w-4/6 
                     lg:w-3/6 
                     xl:w-[580px]
-                    my-6 
-                    mx-auto 
                     h-full
-                    md:h-auto
-                    lg:h-auto 
                 "
             >
                 <div className={`
                     translate 
                     duration-300 
                     h-full
-                    max-h-[85vh]
+                    max-h-[90vh]
                     overflow-y-auto 
                     ${showModal ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}
                 `}>
@@ -117,7 +111,7 @@ const Modal: React.FC<ModalProps> = ({
                             h-full 
                             md:h-auto 
                             lg:h-auto 
-                            border-0 
+                            border
                             rounded-lg 
                             shadow-lg 
                             relative 

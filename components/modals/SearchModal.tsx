@@ -1,16 +1,14 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Range } from "react-date-range";
-import dynamic from "next/dynamic";
 import qs from "query-string";
 import { formatISO } from "date-fns";
 
 import Modal from "./Modal";
 import Heading from "../Heading";
-import Map from "../Map";
-import LocationSelect, { AreaSelectValue, LGASelectValue, StateSelectValue } from "../inputs/LocationSelect";
+import LocationSelect, { StateSelectValue } from "../inputs/LocationSelect";
 import Calendar from "../inputs/Calendar";
 import Counter from "../inputs/Counter";
 
@@ -29,8 +27,6 @@ const SearchModal = () => {
 
     const [step, setStep] = useState(STEPS.LOCATION);
     const [state, setState] = useState<StateSelectValue>();
-    const [lga, setLga] = useState<LGASelectValue>();
-    const [area, setArea] = useState<AreaSelectValue>();
     const [adultCount, setAdultCount] = useState(1);
     const [childrenCount, setChildrenCount] = useState(0);
     const [infantCount, setInfantCount] = useState(0);
@@ -40,11 +36,6 @@ const SearchModal = () => {
         endDate: new Date(),
         key: "selection"
     });
-
-    const map = useMemo(() => dynamic(() => import('../Map'), {
-        ssr: false
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }), [state]);
 
     const onBack = useCallback(() => {
         setStep(value => value - 1);
@@ -72,8 +63,6 @@ const SearchModal = () => {
             infantCount,
             petCount,
             state: state?.value,
-            lga: lga?.value,
-            area: area?.value,
         }
 
         if (dateRange.startDate) {
@@ -93,22 +82,7 @@ const SearchModal = () => {
         searchModal.onClose();
 
         router.push(url);
-    }, [
-        step,
-        params,
-        adultCount,
-        childrenCount,
-        infantCount,
-        petCount,
-        state?.value,
-        lga?.value,
-        area?.value,
-        dateRange.startDate,
-        dateRange.endDate,
-        onNext,
-        searchModal,
-        router
-    ]);
+    }, [step, params, adultCount, childrenCount, infantCount, petCount, state?.value, dateRange.startDate, dateRange.endDate, onNext, searchModal, router]);
 
     const actionLabel = useMemo(() => {
         if (step === STEPS.INFO) {
@@ -132,17 +106,8 @@ const SearchModal = () => {
             />
             <LocationSelect
                 state={state}
-                lga={lga}
-                area={area}
                 onStateChange={(value) => setState(value as StateSelectValue)}
-                onLGAChange={(value) => setLga(value as LGASelectValue)}
-                onAreaChange={(value) => setArea(value as AreaSelectValue)}
             />
-            {state ? (
-                <Map center={[state.latitude, state.longitude]} />
-            ) : (
-                <Map center={[9.079851, 7.47087]} />
-            )}
         </div>
     )
 
