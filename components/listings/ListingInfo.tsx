@@ -2,12 +2,11 @@
 
 import useStates from "@/hooks/useStates";
 
-import { IconType } from "react-icons";
 import { SafeUser } from "@/types";
 
 import Avatar from "../Avatar";
 import ListingCategory from "./ListingCategory";
-import Map from "../Map";
+import GoogleMap from "../GoogleMap";
 
 interface ListingInfo {
     user: SafeUser;
@@ -96,7 +95,7 @@ const ListingInfo: React.FC<ListingInfo> = ({
                 ))}
             </div>
             <hr />
-            <Map center={[latitude, longitude]} />
+            <GoogleMap center={[latitude, longitude]} />
         </div>
     )
 }

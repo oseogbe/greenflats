@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
@@ -23,7 +23,8 @@ enum STEPS {
     INFO = 2,
     IMAGES = 3,
     DESCRIPTION = 4,
-    PRICE = 5
+    PRICE = 5,
+    VETTING = 6
 }
 
 const ListPropertyModal = () => {
@@ -32,6 +33,16 @@ const ListPropertyModal = () => {
 
     const [step, setStep] = useState(STEPS.CATEGORY);
     const [isLoading, setIsLoading] = useState(false);
+
+    const [currentLocation, setCurrentLocation] = useState<[number, number] | null>(null);
+
+    useEffect(() => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                setCurrentLocation([position.coords.latitude, position.coords.longitude]);
+            });
+        }
+    }, []);
 
     const {
         register,
@@ -46,8 +57,6 @@ const ListPropertyModal = () => {
         defaultValues: {
             category: '',
             state: null,
-            lga: null,
-            area: null,
             adultCount: 1,
             childrenCount: 0,
             infantCount: 0,
@@ -63,8 +72,6 @@ const ListPropertyModal = () => {
 
     const category = watch('category');
     const state = watch('state');
-    const lga = watch('lga');
-    const area = watch('area');
     const adultCount = watch('adultCount');
     const childrenCount = watch('childrenCount');
     const infantCount = watch('infantCount');
@@ -73,7 +80,7 @@ const ListPropertyModal = () => {
     const bathroomCount = watch('bathroomCount');
     const images = watch('images');
 
-    const Map = useMemo(() => dynamic(() => import('../Map'), {
+    const GoogleMap = useMemo(() => dynamic(() => import('../GoogleMap'), {
         ssr: false
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }), [state]);
@@ -105,7 +112,6 @@ const ListPropertyModal = () => {
         });
 
         Promise.all(imagePromises).then(result => {
-            console.log("result", result);
             setCustomValue('images', result);
             // axios.post('/api/listings', data)
             //     .then(() => {
@@ -179,16 +185,14 @@ const ListPropertyModal = () => {
                 />
                 <LocationSelect
                     state={state}
-                    lga={lga}
-                    area={area}
                     onStateChange={(value) => setCustomValue('state', value)}
-                    onLGAChange={(value) => setCustomValue('lga', value)}
-                    onAreaChange={(value) => setCustomValue('area', value)}
                 />
                 {state ? (
-                    <Map center={[state.latitude, state.longitude]} />
+                    <GoogleMap center={[state.latitude, state.longitude]} />
+                ) : currentLocation ? (
+                    <GoogleMap center={currentLocation} />
                 ) : (
-                    <Map center={[9.079851, 7.47087]} />
+                    <GoogleMap center={[9.079851, 7.47087]} />
                 )}
             </div>
         );
@@ -304,6 +308,18 @@ const ListPropertyModal = () => {
                     errors={errors}
                     required
                 />
+            </div>
+        )
+    }
+
+    if (step === STEPS.VETTING) {
+        bodyContent = (
+            <div className="flex flex-col gap-8">
+                <Heading
+                    title="Your property requires vetting"
+                    subtitle="Specify a range of dates and times our agents can come around for inspection"
+                />
+
             </div>
         )
     }
