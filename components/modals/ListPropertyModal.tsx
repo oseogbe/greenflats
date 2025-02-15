@@ -9,13 +9,14 @@ import toast from "react-hot-toast";
 
 import Modal from "./Modal";
 import Heading from "../Heading";
+import Input from "../inputs/Input";
 import { categories } from "../navbar/Categories";
 import CategoryInput from "../inputs/CategoryInput";
-import LocationSelect from "../inputs/LocationSelect";
-import useListPropertyModal from "@/hooks/useListPropertyModal";
 import Counter from "../inputs/Counter";
 import ImageUpload from "../inputs/ImageUpload";
-import Input from "../inputs/Input";
+import PlacesSearch from "../inputs/PlacesSearch";
+
+import useListPropertyModal from "@/hooks/useListPropertyModal";
 
 enum STEPS {
     CATEGORY = 0,
@@ -56,7 +57,7 @@ const ListPropertyModal = () => {
     } = useForm<FieldValues>({
         defaultValues: {
             category: '',
-            state: null,
+            location: null,
             adultCount: 1,
             childrenCount: 0,
             infantCount: 0,
@@ -67,11 +68,12 @@ const ListPropertyModal = () => {
             price: 1,
             title: '',
             description: '',
+            vettingDetails: null
         }
     });
 
     const category = watch('category');
-    const state = watch('state');
+    const location = watch('location');
     const adultCount = watch('adultCount');
     const childrenCount = watch('childrenCount');
     const infantCount = watch('infantCount');
@@ -79,11 +81,12 @@ const ListPropertyModal = () => {
     const roomCount = watch('roomCount');
     const bathroomCount = watch('bathroomCount');
     const images = watch('images');
+    const vettingDetails = watch('vettingDetails');
 
     const GoogleMap = useMemo(() => dynamic(() => import('../GoogleMap'), {
         ssr: false
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }), [state]);
+    }), [location]);
 
     const setCustomValue = (id: string, value: any) => {
         setValue(id, value, {
@@ -95,10 +98,24 @@ const ListPropertyModal = () => {
 
     const onBack = () => setStep((value) => value - 1);
 
-    const onNext = () => setStep((value) => value + 1);
+    const onNext = () => {
+        if (step === STEPS.CATEGORY && !category) {
+            toast.error("Please select a category.", {
+                position: "bottom-right"
+            });
+            return;
+        }
+        if (step === STEPS.LOCATION && !location) {
+            toast.error("Please select a location.", {
+                position: "bottom-right"
+            });
+            return;
+        }
+        setStep((value) => value + 1);
+    };
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        if (step !== STEPS.PRICE) {
+        if (step !== STEPS.VETTING) {
             return onNext();
         }
         setIsLoading(true);
@@ -112,26 +129,29 @@ const ListPropertyModal = () => {
         });
 
         Promise.all(imagePromises).then(result => {
-            setCustomValue('images', result);
-            // axios.post('/api/listings', data)
-            //     .then(() => {
-            //         toast.success("Property listing created!");
-            //         router.refresh();
-            //         reset();
-            //         setStep(STEPS.CATEGORY);
-            //         listPropertyModal.onClose();
-            //     }).catch(() => {
-            //         toast.error("An error occurred.");
-            //     }).finally(() => {
-            //         setIsLoading(false);
-            //     });
+            data.images = result;
+            axios.post('/api/listings', data)
+                .then(() => {
+                    toast.success("Property listing created!");
+                    router.refresh();
+                    reset();
+                    setStep(STEPS.CATEGORY);
+                    listPropertyModal.onClose();
+                }).catch(() => {
+                    toast.error("An error occurred.", {
+                        position: "bottom-right"
+                    });
+                }).finally(() => {
+                    setIsLoading(false);
+                });
         }).catch(error => {
             console.error("Error uploading images:", error);
-        })
+            setIsLoading(false);
+        });
     }
 
     const actionLabel = useMemo(() => {
-        if (step === STEPS.PRICE) return "Create";
+        if (step === STEPS.VETTING) return "Create";
         return "Next";
     }, [step]);
 
@@ -183,12 +203,12 @@ const ListPropertyModal = () => {
                     title="Where is your property located?"
                     subtitle="Help guests find you!"
                 />
-                <LocationSelect
-                    state={state}
-                    onStateChange={(value) => setCustomValue('state', value)}
+                <PlacesSearch
+                    location={location}
+                    onSelect={(location) => setCustomValue('location', location)}
                 />
-                {state ? (
-                    <GoogleMap center={[state.latitude, state.longitude]} />
+                {location ? (
+                    <GoogleMap center={[location.latitude, location.longitude]} />
                 ) : currentLocation ? (
                     <GoogleMap center={currentLocation} />
                 ) : (
@@ -332,7 +352,7 @@ const ListPropertyModal = () => {
             actionLabel={actionLabel}
             secondaryActionLabel={secondaryActionLabel}
             secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
-            title="List your property!"
+            title="List your property"
             body={bodyContent}
         />
     )

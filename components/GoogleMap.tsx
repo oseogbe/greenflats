@@ -24,7 +24,7 @@ const GoogleMapsComponent: React.FC<GoogleMapProps> = ({ center }) => {
             <GoogleMap
                 mapContainerStyle={{ width: "100%", height: "100%" }}
                 center={mapCenter}
-                zoom={12}
+                zoom={14}
             >
                 <Marker position={mapCenter} />
             </GoogleMap>

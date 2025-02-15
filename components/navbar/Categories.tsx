@@ -105,7 +105,7 @@ export const categories = [
     },
     {
         label: 'Mansion',
-        description: 'Grand, opulent residences typically featuring extensive grounds, multiple levels, and luxurious amenities, designed for affluent buyers seeking prestige and space'
+        description: 'Grand, opulent residences typically featuring extensive grounds, multiple levels, and luxurious amenities, designed for affluent buyers seeking prestige and space.'
     },
     {
         label: 'Penthouse',
@@ -113,16 +113,16 @@ export const categories = [
     },
     {
         label: 'Shortlet',
-        description: 'Temporary accommodations available for short-term stays, suitable for travelers or individuals seeking temporary housing solutions.'
+        description: 'Temporary accommodations perfect for short stays, whether for vacations, business trips, or short-term rentals.'
     },
     {
         label: 'Townhouse',
         description: 'Multi-story homes with shared walls, offering a blend of suburban living and urban convenience, often featuring private outdoor spaces.'
     },
-    {
-        label: 'Trending',
-        description: 'Properties garnering significant attention and interest due to unique features, location, or market demand.'
-    },
+    // {
+    //     label: 'Trending',
+    //     description: 'Properties garnering significant attention and interest due to unique features, location, or market demand.'
+    // },
     {
         label: 'Villa',
         description: 'Spacious, luxurious homes typically set in expansive grounds, offering privacy, exclusivity, and upscale amenities.'

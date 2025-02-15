@@ -7,7 +7,7 @@ import { Range } from "react-date-range";
 import toast from "react-hot-toast";
 import axios from "axios";
 
-import { SafeListing, SafeUser, SafeReservation } from "@/types";
+import { SafeListing, SafeUser, SafeReservation, Location } from "@/types";
 import Container from "@/components/Container";
 import ListingHead from "@/components/listings/ListingHead";
 import ListingInfo from "@/components/listings/ListingInfo";
@@ -99,6 +99,9 @@ const ListingClient: React.FC<ListingClientProps> = ({
         return categories.find(item => item.label === listing.category);
     }, [listing.category]);
 
+    const state = (listing.location as Location).addressComponents.find(c => c.types.includes("administrative_area_level_1"))?.longText
+    const area = (listing.location as Location).addressComponents.find(c => c.types.includes("neighborhood"))?.longText
+
     return (
         <Container>
             <div className="max-w-screen-lg mx-auto">
@@ -106,8 +109,8 @@ const ListingClient: React.FC<ListingClientProps> = ({
                     <ListingHead
                         title={listing.title}
                         images={listing.images}
-                        state={listing.state}
-                        area={listing.area}
+                        state={state}
+                        area={area}
                         id={listing.id}
                         currentUser={currentUser}
                     />
@@ -128,7 +131,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
                             childrenCount={listing.childrenCount}
                             infantCount={listing.infantCount}
                             petCount={listing.petCount}
-                            state={listing.state}
+                            location={listing.location}
                         />
                         <div className="
                             order-first 

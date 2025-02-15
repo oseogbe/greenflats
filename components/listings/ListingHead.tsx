@@ -15,8 +15,8 @@ import ImageGallery from "../ImageGallery";
 interface ListingHeadProps {
     title: string;
     images: string[];
-    state: string;
-    area: string;
+    state?: string;
+    area?: string;
     id: string;
     currentUser?: SafeUser | null;
 }

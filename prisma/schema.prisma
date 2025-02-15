@@ -59,9 +59,7 @@ model Listing {
   childrenCount Int
   infantCount   Int
   petCount      Int
-  state         String
-  lga           String
-  area          String
+  location      Json?
   userId        String   @db.ObjectId
   price         Int
 

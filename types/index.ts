@@ -25,3 +25,18 @@ export type SafeReservation = Omit<
     endDate: string;
     listing: SafeListing;
 }
+
+export type AddressComponent = {
+    longText: string;
+    shortText: string;
+    types: string[];
+    languageCode: string;
+};
+
+export type Location = {
+    displayName: string;
+    formattedAddress: string;
+    addressComponents: AddressComponent[];
+    latitude: number;
+    longitude: number;
+};

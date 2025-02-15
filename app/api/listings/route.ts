@@ -25,9 +25,8 @@ export async function POST(
         childrenCount,
         infantCount,
         petCount,
-        state,
-        lga,
-        area,
+        location,
+        // vettingDetails,
         price
     } = body;
 
@@ -49,9 +48,7 @@ export async function POST(
             childrenCount,
             infantCount,
             petCount,
-            state: state.value,
-            lga: lga.value,
-            area: area.value,
+            location,
             price: parseInt(price, 10),
             userId: currentUser.id
         }

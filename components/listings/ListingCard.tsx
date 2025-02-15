@@ -6,7 +6,7 @@ import Image from "next/image";
 import { format } from "date-fns";
 import Slider from "react-slick";
 
-import { SafeListing, SafeReservation, SafeUser } from "@/types";
+import { Location, SafeListing, SafeReservation, SafeUser } from "@/types";
 import HeartButton from "../HeartButton";
 import Button from "../Button";
 
@@ -34,8 +34,8 @@ const ListingCard: React.FC<ListingCardProps> = ({
 }) => {
     const router = useRouter();
 
-    const state = data.state;
-    const area = data.area;
+    const state = (data.location as Location)?.addressComponents.find(c => c.types.includes("administrative_area_level_1"))?.longText
+    const area = (data.location as Location)?.addressComponents.find(c => c.types.includes("neighborhood"))?.longText
 
     const settings = {
         arrows: true,

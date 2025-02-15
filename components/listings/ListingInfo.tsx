@@ -1,7 +1,5 @@
 "use client";
 
-import useStates from "@/hooks/useStates";
-
 import { SafeUser } from "@/types";
 
 import Avatar from "../Avatar";
@@ -22,7 +20,7 @@ interface ListingInfo {
     childrenCount: number;
     infantCount: number;
     petCount: number;
-    state: string;
+    location: any;
 }
 
 const ListingInfo: React.FC<ListingInfo> = ({
@@ -35,11 +33,9 @@ const ListingInfo: React.FC<ListingInfo> = ({
     childrenCount,
     infantCount,
     petCount,
-    state,
+    location,
 }) => {
-    const { getByValue } = useStates();
-
-    const { latitude, longitude } = getByValue(state);
+    const { latitude, longitude } = location;
 
     return (
         <div className="

@@ -102,6 +102,8 @@ const Modal: React.FC<ModalProps> = ({
                     h-full
                     max-h-[90vh]
                     overflow-y-auto 
+                    scrollbar-thin
+                    scrollbar-track-green-100
                     ${showModal ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}
                 `}>
                     {/* Content */}
